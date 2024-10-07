@@ -8,7 +8,7 @@ from custom_logging import get_logger_with_level
 log = get_logger_with_level( logging.DEBUG )
 
 OPEN_AI_API_KEY = os.environ.get("OPENAI_API_KEY")
-openai_client = AsyncOpenAI(api_key=OPEN_AI_API_KEY)
+async_openai_client = AsyncOpenAI(api_key=OPEN_AI_API_KEY)
 
 BASE_PATH = Path(os.path.dirname(os.path.realpath(__file__)))
 
@@ -20,7 +20,7 @@ async def request_o1_chat_completion(
     """Request exam guide enhancement chat completion"""
     messages = [{"role": role, "content": msg_content} for role, msg_content in msgs]
     try:
-        completion = await openai_client.chat.completions.create(
+        completion = await async_openai_client.chat.completions.create(
             messages=messages,
             model=model,
         )
