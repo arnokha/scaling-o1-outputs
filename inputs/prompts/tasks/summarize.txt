@@ -1,0 +1,7 @@
+Please generate a summary of the following Introduction to the "History of Philosophy" by A. C. Grayling. 
+Rather than listing things point by point, put this summary in paragraph form, as if it was naturally written.
+
+introduction.txt:
+```
+{{REFERENCE}}
+```
