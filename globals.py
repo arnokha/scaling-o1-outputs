@@ -1,10 +1,11 @@
 import os
+import pandas as pd
+import logging
 from openai import AsyncOpenAI
 from typing import List, Tuple, Optional, Dict
 from pathlib import Path
-
-import logging
 from custom_logging import get_logger_with_level
+
 log = get_logger_with_level( logging.DEBUG )
 
 OPEN_AI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -46,7 +47,24 @@ def replace_placeholders(text: str, replacements: Dict[str, str]) -> str:
         text = text.replace(key, value)
     return text
 
+def load_or_create_csv(filepath, columns) -> pd.DataFrame:
+    """
+    Load a CSV file if it exists, otherwise create a new DataFrame with specified columns.
 
+    Args:
+        filepath (Path): Path to the CSV file.
+        columns (list): List of column names for the DataFrame.
+
+    Returns:
+        pd.DataFrame: Loaded or newly created DataFrame.
+    """
+    if filepath.exists():
+        df = pd.read_csv(filepath)
+        log.info(f"Loaded existing CSV: {filepath.name} with {len(df)} rows.")
+    else:
+        df = pd.DataFrame(columns=columns)
+        log.info(f"Created new DataFrame for CSV: {filepath.name}.")
+    return df
 # def parse_reasoning_and_answer(response_text: str) -> Tuple[str, str]:
 #     # Split the response text based on the delimiter (three or more dashes)
 #     parts = re.split(r'-{3,}', response_text)
