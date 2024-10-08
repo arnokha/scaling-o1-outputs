@@ -10,13 +10,12 @@ from openai import AsyncOpenAI
 ##-=-=-=-=-=-=-=-=-=-=
 ## Helper functions
 ##-=-=-=-=-=-=-=-=-=-=
-# roles are assistant and user
 async def request_o1_chat_completion(
     client: AsyncOpenAI,
-    msgs: List[Tuple[str,str]], 
+    msgs: List[Tuple[str,str]], # roles are assistant and user
     model: str = "o1-preview",
 )-> Optional[str]:
-    """Request exam guide enhancement chat completion"""
+    """Request openai o1 chat completion"""
     messages = [{"role": role, "content": msg_content} for role, msg_content in msgs]
     try:
         completion = await client.chat.completions.create(
@@ -31,7 +30,7 @@ async def request_o1_chat_completion(
         raise e
     return str(content)
 
-def read_file_to_text(filepath: str) -> str:
+def read_file_to_str(filepath: str) -> str:
     try:
         with open(filepath, 'r') as f:
             text = f.read()
@@ -46,16 +45,7 @@ def replace_placeholders(text: str, replacements: Dict[str, str]) -> str:
     return text
 
 def load_or_create_csv(filepath, columns) -> pd.DataFrame:
-    """
-    Load a CSV file if it exists, otherwise create a new DataFrame with specified columns.
-
-    Args:
-        filepath (Path): Path to the CSV file.
-        columns (list): List of column names for the DataFrame.
-
-    Returns:
-        pd.DataFrame: Loaded or newly created DataFrame.
-    """
+    """Load a CSV file if it exists, otherwise create a new DataFrame with specified columns."""
     if filepath.exists():
         df = pd.read_csv(filepath)
         log.info(f"Loaded existing CSV: {filepath.name} with {len(df)} rows.")
@@ -63,6 +53,7 @@ def load_or_create_csv(filepath, columns) -> pd.DataFrame:
         df = pd.DataFrame(columns=columns)
         log.info(f"Created new DataFrame for CSV: {filepath.name}.")
     return df
+
 # def parse_reasoning_and_answer(response_text: str) -> Tuple[str, str]:
 #     # Split the response text based on the delimiter (three or more dashes)
 #     parts = re.split(r'-{3,}', response_text)
@@ -102,11 +93,11 @@ log = get_logger_with_level( logging.DEBUG )
 
 BASE_PATH = Path(os.path.dirname(os.path.realpath(__file__)))
 
-summarize_task_prompt = read_file_to_text(BASE_PATH / "inputs/prompts/tasks/summarize.txt")
-music_viz_gen_task_prompt = read_file_to_text(BASE_PATH / "inputs/prompts/tasks/music_viz_gen.txt")
+summarize_task_prompt = read_file_to_str(BASE_PATH / "inputs/prompts/tasks/summarize.txt")
+music_viz_gen_task_prompt = read_file_to_str(BASE_PATH / "inputs/prompts/tasks/music_viz_gen.txt")
 
-summarize_task_reference = read_file_to_text(BASE_PATH / "inputs/references/grayling_introduction.txt")
-music_viz_gen_task_reference = read_file_to_text(BASE_PATH / "inputs/references/music_viz_gen.py")
+summarize_task_reference = read_file_to_str(BASE_PATH / "inputs/references/grayling_introduction.txt")
+music_viz_gen_task_reference = read_file_to_str(BASE_PATH / "inputs/references/music_viz_gen.py")
 
 summarize_task_prompt = replace_placeholders(summarize_task_prompt, {"{{REFERENCE}}": summarize_task_reference})
 music_viz_gen_task_prompt = replace_placeholders(music_viz_gen_task_prompt, {"{{REFERENCE}}": music_viz_gen_task_reference})
