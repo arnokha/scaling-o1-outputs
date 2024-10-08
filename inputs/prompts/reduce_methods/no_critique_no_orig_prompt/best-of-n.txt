@@ -1,0 +1,30 @@
+Out of these given responses, pick the best response. Your response must be in the format: 
+```
+<justification>
+    announce winner and justify why it wins
+</justification>
+
+<best-response>
+    reproduce the winner response exactly, word-for-word
+</best-response>
+```
+
+---
+
+Candidate responses:
+```
+{{RESPONSES_FMT}}
+```
+
+---
+
+Out of these given responses, pick the best response. Your response must be in the format: 
+```
+<justification>
+    announce winner and justify why it wins
+</justification>
+
+<best-response>
+    reproduce the winner response exactly, word-for-word
+</best-response>
+```

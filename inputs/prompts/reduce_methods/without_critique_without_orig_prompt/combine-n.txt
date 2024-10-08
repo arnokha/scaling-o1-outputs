@@ -1,5 +1,0 @@
-Combine these responses into the best possible response
-
-{{RESPONSES_FMT}}
-
-Combine these responses into the best possible response

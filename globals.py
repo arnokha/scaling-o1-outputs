@@ -54,6 +54,18 @@ def load_or_create_csv(filepath, columns) -> pd.DataFrame:
         log.info(f"Created new DataFrame for CSV: {filepath.name}.")
     return df
 
+def extract_xml(response: str, tag: str):
+    opening_tag = f"<{tag}>"
+    closing_tag = f"</{tag}>"
+    if not (opening_tag in response and closing_tag in response):
+        log.warning("Unable to extract information for given tag (LLM likely did not follow response formatting instructions)")
+        return response
+    else:
+        start_index = response.find(opening_tag) + len(opening_tag)
+        end_index = response.find(closing_tag, start_index)
+        content = response[start_index:end_index]
+        return content.strip()
+
 # def parse_reasoning_and_answer(response_text: str) -> Tuple[str, str]:
 #     # Split the response text based on the delimiter (three or more dashes)
 #     parts = re.split(r'-{3,}', response_text)
@@ -89,7 +101,7 @@ def load_or_create_csv(filepath, columns) -> pd.DataFrame:
 ##-=-=-=-=-=-=-=-=-=-=
 ## Global vars
 ##-=-=-=-=-=-=-=-=-=-=
-log = get_logger_with_level( logging.DEBUG )
+log = get_logger_with_level( logging.WARNING )
 
 BASE_PATH = Path(os.path.dirname(os.path.realpath(__file__)))
 
@@ -120,12 +132,20 @@ experiment_tasks = [
         "name": task_name_summarize,
         "prompt": summarize_task_prompt,
         "df": responses_summarize_df,
-        "filepath": responses_summarize_df_filepath
+        "responses_filepath": responses_summarize_df_filepath
     },
     {
         "name": task_name_music_viz,
         "prompt": music_viz_gen_task_prompt,
         "df": responses_music_viz_df,
-        "filepath": responses_music_viz_df_filepath
+        "responses_filepath": responses_music_viz_df_filepath
     }
 ]
+
+reduce_prompt__best_of_n__no_prompt_no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique_no_orig_prompt/best-of-n.txt") # only need to insert responses
+reduce_prompt__best_of_n__no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique/best-of-n.txt") # insert responses and orig prompt
+reduce_prompt__best_of_n__with_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/with_critique/best-of-n.txt") # insert responses and orig prompt
+
+reduce_prompt__combine_n__no_prompt_no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique_no_orig_prompt/combine-n.txt") # only need to insert responses
+reduce_prompt__combine_n__no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique/combine-n.txt") # insert responses and orig prompt
+reduce_prompt__combine_n__with_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/with_critique/combine-n.txt") # insert responses and orig prompt

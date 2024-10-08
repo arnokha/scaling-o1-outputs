@@ -1,9 +1,5 @@
 Combine these responses into the best possible response. Your response must be in the format: 
 ```
-<critiques>
-    critique each of the responses
-</critiques>
-
 <discussion>
     discuss how to combine the two responses to create a better response
 </discussion>
@@ -15,14 +11,7 @@ Combine these responses into the best possible response. Your response must be i
 
 ---
 
-Original prompt:
-```
-{{PROMPT}}
-```
-
----
-
-Responses:
+Candidate responses:
 ```
 {{RESPONSES_FMT}}
 ```
@@ -31,10 +20,6 @@ Responses:
 
 Combine these responses into the best possible response. Your response must be in the format: 
 ```
-<critiques>
-    critique each of the responses
-</critiques>
-
 <discussion>
     discuss how to combine the two responses to create a better response
 </discussion>

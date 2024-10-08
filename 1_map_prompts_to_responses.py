@@ -32,7 +32,7 @@ async def main():
             task_name: str = task["name"]
             task_prompt: str = task["prompt"]
             df: pd.DataFrame = task["df"]
-            filepath: Path = task["filepath"]
+            responses_filepath: Path = task["responses_filepath"]
             
             rows = df.to_dict(orient='records') # keep records from existing df
             coroutines = []  # To hold coroutines for i > 0
@@ -40,7 +40,7 @@ async def main():
             log.info(f"Processing task: {task_name}")
             print()
 
-            # Warm-up the cache by running the first request synchronously
+            # Populate the cache by running the first request synchronously
             warmup_response = await fetch_response(semaphore, client, task_prompt)
             if warmup_response is not None:
                 new_row = {
@@ -72,8 +72,8 @@ async def main():
             
             # Update the DataFrame and save to CSV
             df = pd.DataFrame(rows)
-            df.to_csv(filepath, index=False)
-            log.info(f"Saved responses for task '{task_name}' to {filepath}")
+            df.to_csv(responses_filepath, index=False)
+            log.info(f"Saved responses for task '{task_name}' to {responses_filepath}")
 
 
 if __name__ == "__main__":

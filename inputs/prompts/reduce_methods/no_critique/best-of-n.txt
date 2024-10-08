@@ -1,9 +1,5 @@
-Critique each of these responses. Out of these given responses, pick the best response. Your response must be in the format: 
+Out of these given responses, pick the best response.Your response must be in the format: 
 ```
-<critiques>
-    critique each of the responses
-</critiques>
-
 <justification>
     announce winner and justify why it wins
 </justification>
@@ -29,12 +25,8 @@ Responses:
 
 ---
 
-Critique each of these responses. Out of these given responses, pick the best response. Your response must be in the format: 
+Out of these given responses, pick the best response.Your response must be in the format: 
 ```
-<critiques>
-    critique each of the responses
-</critiques>
-
 <justification>
     announce winner and justify why it wins
 </justification>

@@ -1,5 +1,0 @@
-Out of these given responses, pick the best response
-
-{{RESPONSES_FMT}}
-
-Out of these given responses, pick the best response
