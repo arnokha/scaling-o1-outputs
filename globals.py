@@ -1,27 +1,25 @@
+# utils and globals
 import os
 import pandas as pd
 import logging
-from openai import AsyncOpenAI
 from typing import List, Tuple, Optional, Dict
 from pathlib import Path
 from custom_logging import get_logger_with_level
+from openai import AsyncOpenAI
 
-log = get_logger_with_level( logging.DEBUG )
-
-OPEN_AI_API_KEY = os.environ.get("OPENAI_API_KEY")
-async_openai_client = AsyncOpenAI(api_key=OPEN_AI_API_KEY)
-
-BASE_PATH = Path(os.path.dirname(os.path.realpath(__file__)))
-
+##-=-=-=-=-=-=-=-=-=-=
+## Helper functions
+##-=-=-=-=-=-=-=-=-=-=
 # roles are assistant and user
 async def request_o1_chat_completion(
+    client: AsyncOpenAI,
     msgs: List[Tuple[str,str]], 
     model: str = "o1-preview",
 )-> Optional[str]:
     """Request exam guide enhancement chat completion"""
     messages = [{"role": role, "content": msg_content} for role, msg_content in msgs]
     try:
-        completion = await async_openai_client.chat.completions.create(
+        completion = await client.chat.completions.create(
             messages=messages,
             model=model,
         )
@@ -97,8 +95,13 @@ def load_or_create_csv(filepath, columns) -> pd.DataFrame:
     
 #     raise ValueError("No winner declaration found in the response.")
 
-
+##-=-=-=-=-=-=-=-=-=-=
 ## Global vars
+##-=-=-=-=-=-=-=-=-=-=
+log = get_logger_with_level( logging.DEBUG )
+
+BASE_PATH = Path(os.path.dirname(os.path.realpath(__file__)))
+
 summarize_task_prompt = read_file_to_text(BASE_PATH / "inputs/prompts/tasks/summarize.txt")
 music_viz_gen_task_prompt = read_file_to_text(BASE_PATH / "inputs/prompts/tasks/music_viz_gen.txt")
 
@@ -107,3 +110,31 @@ music_viz_gen_task_reference = read_file_to_text(BASE_PATH / "inputs/references/
 
 summarize_task_prompt = replace_placeholders(summarize_task_prompt, {"{{REFERENCE}}": summarize_task_reference})
 music_viz_gen_task_prompt = replace_placeholders(music_viz_gen_task_prompt, {"{{REFERENCE}}": music_viz_gen_task_reference})
+
+responses_summarize_df_filepath = BASE_PATH / "outputs/1_map_outputs/responses_summarize.csv"
+responses_music_viz_df_filepath = BASE_PATH / "outputs/1_map_outputs/responses_music_viz.csv"
+responses_columns = ["task_name", "model_provider", "model", "response"]
+
+MODEL = "o1-preview"
+MODEL_PROVIDER = "openai"
+
+task_name_summarize = "summarize_intro"
+task_name_music_viz = "music_viz_gen"
+
+responses_summarize_df = load_or_create_csv(responses_summarize_df_filepath, responses_columns)
+responses_music_viz_df = load_or_create_csv(responses_music_viz_df_filepath, responses_columns)
+
+experiment_tasks = [
+    {
+        "name": task_name_summarize,
+        "prompt": summarize_task_prompt,
+        "df": responses_summarize_df,
+        "filepath": responses_summarize_df_filepath
+    },
+    {
+        "name": task_name_music_viz,
+        "prompt": music_viz_gen_task_prompt,
+        "df": responses_music_viz_df,
+        "filepath": responses_music_viz_df_filepath
+    }
+]
