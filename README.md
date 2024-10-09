@@ -93,3 +93,4 @@ After running the scripts, you will find:
 
 ## Results (2024/10/09)
 - "Combine-n", with critique, and a small n responses (n=2,4), seems to work best.
+- Should probably be run with more tasks for a more trustworthy result
