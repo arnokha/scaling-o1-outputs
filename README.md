@@ -67,7 +67,7 @@ python 3_rank_outputs.py
 This script:
 
 - Ranks the reduced outputs, including a control response (original response without reduction).
-- Uses an LLM to obtain rankings.
+- Uses an LLM to obtain rankings. Runs multiple permutations of ordering to reduce any bias from ordering of responses.
 - Saves the ranking results to CSV files in `outputs/3_rank_outputs/`.
 
 ## Outputs
