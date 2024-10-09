@@ -90,3 +90,6 @@ After running the scripts, you will find:
 - `average_ranks_same_n.csv`: Average ranks for the same N comparison.
 - `ranking_results_across_n.csv`: Ranking results comparing N values for the same method. (vary and compare n responses)
 - `average_ranks_across_n.csv`: Average ranks for the across N comparison.
+
+## Results (2024/10/09)
+- "Combine-n", with critique, and a small n responses (n=2,4), seems to work best.
