@@ -16,9 +16,9 @@
 #       - Repeat binary fusion of responses until one final "ideal" output remains
 #
 #  Prompt variations:
-#  - omit original prompt, omit critique instructions
-#  - include original prompt, omit critique instructions
-#  - include original prompt, include critique instructions
+#  - 'no_prompt_no_critique': omit original prompt, omit critique instructions
+#  - 'no_critique': include original prompt, omit critique instructions
+#  - 'with_critique': include original prompt, include critique instructions
 
 import asyncio
 import pandas as pd
@@ -39,7 +39,7 @@ from globals import (
 )
 from typing import List, Dict
 
-N_VALUES = [2, 4, 8, 16, 32]
+N_RESPONSES = [2, 4, 8, 16, 32]
 
 # Load and organize prompt templates
 reduce_prompts = {
@@ -98,7 +98,7 @@ async def process_reduce_method(
         task_prompt: str = task["prompt"]
         responses_df: pd.DataFrame = task["df"]
 
-        for n in N_VALUES:
+        for n in N_RESPONSES:
             # Retrieve the top n responses for the task
             responses = responses_df['response'].head(n).tolist()
             # Format the responses with the delimiter

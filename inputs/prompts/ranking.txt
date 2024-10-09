@@ -1,0 +1,45 @@
+Critique each of the given responses, and then rank them by quality. Your response must be in the format: 
+```
+<critiques>
+    critique each of the responses
+</critiques>
+
+<justification>
+    announce ranking and justification for rankings
+</justification>
+
+<ranking>
+    comma-seperated list of indexes indicating the ranking (e.g. "3,5,2,1,4")
+</ranking>
+```
+
+---
+
+Original prompt:
+```
+{{PROMPT}}
+```
+
+---
+
+Responses:
+```
+{{RESPONSES_FMT}}
+```
+
+---
+
+Critique each of the given responses, and then rank them by quality. Your response must be in the format: 
+```
+<critiques>
+    critique each of the responses
+</critiques>
+
+<justification>
+    announce ranking and justification for rankings
+</justification>
+
+<ranking>
+    comma-seperated list of indexes indicating the ranking (e.g. "3,5,2,1,4")
+</ranking>
+```
