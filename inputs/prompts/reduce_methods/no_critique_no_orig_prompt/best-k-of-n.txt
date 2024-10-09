@@ -1,0 +1,50 @@
+Out of these given responses, pick the best k={{K}} responses. Your response must be in the format: 
+```
+<justification>
+    announce the top {{K}} responses and justify why you chose them.
+</justification>
+
+<best-response>
+    reproduce the winner response exactly, word-for-word
+</best-response>
+
+<best-response-2>
+    reproduce the second best response exactly, word-for-word
+</best-response-2>
+
+...
+
+<best-response-k>
+    reproduce the kth best response exactly, word-for-word
+</best-response-k>
+```
+
+---
+
+Responses:
+```
+{{RESPONSES_FMT}}
+```
+
+---
+
+Out of these given responses, pick the best k={{K}} responses. Your response must be in the format: 
+```
+<justification>
+    announce the top {{K}} responses and justify why you chose them.
+</justification>
+
+<best-response>
+    reproduce the winner response exactly, word-for-word
+</best-response>
+
+<best-response-2>
+    reproduce the second best response exactly, word-for-word
+</best-response-2>
+
+...
+
+<best-response-k>
+    reproduce the kth best response exactly, word-for-word
+</best-response-k>
+```

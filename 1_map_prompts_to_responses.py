@@ -1,4 +1,4 @@
-## Generate and store responses to prompts
+## Generate and store responses to task prompts
 import asyncio
 import pandas as pd
 from pathlib import Path

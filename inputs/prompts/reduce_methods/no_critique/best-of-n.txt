@@ -1,4 +1,4 @@
-Out of these given responses, pick the best response.Your response must be in the format: 
+Out of these given responses, pick the best response. Your response must be in the format: 
 ```
 <justification>
     announce winner and justify why it wins
@@ -25,7 +25,7 @@ Responses:
 
 ---
 
-Out of these given responses, pick the best response.Your response must be in the format: 
+Out of these given responses, pick the best response. Your response must be in the format: 
 ```
 <justification>
     announce winner and justify why it wins

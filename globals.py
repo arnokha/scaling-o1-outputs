@@ -141,11 +141,3 @@ experiment_tasks = [
         "responses_filepath": responses_music_viz_df_filepath
     }
 ]
-
-reduce_prompt__best_of_n__no_prompt_no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique_no_orig_prompt/best-of-n.txt") # only need to insert responses
-reduce_prompt__best_of_n__no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique/best-of-n.txt") # insert responses and orig prompt
-reduce_prompt__best_of_n__with_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/with_critique/best-of-n.txt") # insert responses and orig prompt
-
-reduce_prompt__combine_n__no_prompt_no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique_no_orig_prompt/combine-n.txt") # only need to insert responses
-reduce_prompt__combine_n__no_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/no_critique/combine-n.txt") # insert responses and orig prompt
-reduce_prompt__combine_n__with_critique = read_file_to_str(BASE_PATH / "inputs/prompts/reduce_methods/with_critique/combine-n.txt") # insert responses and orig prompt
